@@ -40,5 +40,6 @@ int main()
 	log.Warn("Hello!");
 	log.Error("Error");
 	log.Info("Info");
+
 	std::cin.get();
 }
