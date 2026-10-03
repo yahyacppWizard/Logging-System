@@ -1,20 +1,44 @@
 #include <iostream>
 
+class Log
+{
+public:
+	const int LogLevelError = 0;
+	const int LogLevelWarning = 1;
+	const int LogLevelInfo = 2;
+private:
+	int m_LogLevel = LogLevelInfo;
+public:
+	void SetLevel(int level)
+	{
+		m_LogLevel = level;
+	}
+
+	void Warn(const char* message)
+	{
+		if (m_LogLevel >= LogLevelWarning)
+		    std::cout << "[WARNING]: " << message << std::endl;
+	}
+
+	void Error(const char* message)
+	{
+		if (m_LogLevel >= LogLevelError)
+			std::cout << "[ERROR]: " << message << std::endl;
+	}
+
+	void Info(const char* message)
+	{
+		if (m_LogLevel >= LogLevelInfo)
+		    std::cout << "[INFO]: " << message << std::endl;
+	}
+};
+
 int main()
 {
-	int number = 67;
-	double doub = 5.5;
-	float flo = 5.5f;
-	char character = 'A';
-
-	std::cout << "Number is " << number << std::endl;
-	std::cout << "Double is " << doub << std::endl;
-	std::cout << "Float is " << flo << std::endl;
-	std::cout << "Character is " << character << std::endl;
-
-	std::cout << "Size of Number is " << sizeof(number) << std::endl;
-	std::cout << "Size of Double is " << sizeof(doub) << std::endl;
-	std::cout << "Size of Float is " << sizeof(flo) << std::endl;
-	std::cout << "Size of Character is " << sizeof(character) << std::endl;
+	Log log;
+	log.SetLevel(log.LogLevelWarning);
+	log.Warn("Hello!");
+	log.Error("Error");
+	log.Info("Info");
 	std::cin.get();
 }
